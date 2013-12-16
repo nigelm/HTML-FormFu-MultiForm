@@ -8,7 +8,7 @@ use HTML::FormFu::MultiForm;
 my $multi = HTML::FormFu::MultiForm->new(
     { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );
 
-$multi->load_config_file('t/multiform_hidden_name/multiform.yml');
+$multi->load_config_file('t-aggregate/multiform-nested-name/multiform.yml');
 
 $multi->process;
 
@@ -17,6 +17,11 @@ my $html = <<HTML;
 <fieldset>
 <div>
 <input name="foo" type="text" />
+</div>
+<div>
+<div>
+<input name="block.foo" type="text" />
+</div>
 </div>
 <div>
 <input name="submit" type="submit" />

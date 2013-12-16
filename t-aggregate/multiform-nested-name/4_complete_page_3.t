@@ -7,7 +7,7 @@ use HTML::FormFu::MultiForm;
 
 # submit form 1
 
-my $yaml_file = 't/multiform-nested-name/multiform.yml';
+my $yaml_file = 't-aggregate/multiform-nested-name/multiform.yml';
 my $form2_hidden_value;
 
 {

@@ -8,7 +8,7 @@ use Crypt::CBC ();
 use Storable qw/ thaw /;
 use YAML::XS qw/ LoadFile /;
 
-my $yaml_file = 't/multiform-no-combine/multiform.yml';
+my $yaml_file = 't-aggregate/multiform-no-combine/multiform.yml';
 
 my $multi = HTML::FormFu::MultiForm->new(
     { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );

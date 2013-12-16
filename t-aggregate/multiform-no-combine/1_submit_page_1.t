@@ -7,7 +7,7 @@ use HTML::FormFu::MultiForm;
 
 my $multi = HTML::FormFu::MultiForm->new;
 
-$multi->load_config_file('t/multiform-no-combine/multiform.yml');
+$multi->load_config_file('t-aggregate/multiform-no-combine/multiform.yml');
 
 $multi->process( {
         foo    => 'abc',

@@ -7,7 +7,7 @@ use HTML::FormFu::MultiForm;
 
 # submit form 1
 
-my $yaml_file = 't/multiform/multiform.yml';
+my $yaml_file = 't-aggregate/multiform_hidden_name/multiform.yml';
 my $form2_hidden_value;
 
 {
@@ -24,8 +24,7 @@ my $form2_hidden_value;
 
     my $form2 = $multi->next_form;
 
-    my $hidden_field = $form2->get_field(
-        { name => $multi->default_multiform_hidden_name } );
+    my $hidden_field = $form2->get_field( { name => 'crypt' } );
 
     $form2_hidden_value = $hidden_field->default;
 }
@@ -39,9 +38,9 @@ my $form2_hidden_value;
     $multi->load_config_file($yaml_file);
 
     $multi->process( {
-            $multi->default_multiform_hidden_name => $form2_hidden_value,
-            bar                                   => 'def',
-            submit                                => 'Submit',
+            crypt  => $form2_hidden_value,
+            bar    => 'def',
+            submit => 'Submit',
         } );
 
     my $form = $multi->current_form;
