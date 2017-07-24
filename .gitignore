@@ -1,0 +1,39 @@
+# avoid version control files.
+.git
+
+# avoid temp and backup files.
+*~
+*#
+*.bak
+*.old
+*.rej
+*.swp
+*.tmp
+.DS_Store
+.vstags
+
+# avoid utility files
+.build
+_build
+
+# avoid compiled gettext files
+*.mo
+
+# avoid archives of this distribution
+HTML-FormFu-MultiForm-*
+
+# stuff thats part of the build
+blib*
+Makefile
+Build
+Build.bat
+_build*
+pm_to_blib*
+META.yml
+tmp
+.tidyall.d
+pod2htm*.tmp
+
+# Carton packaging stuff
+local
+
