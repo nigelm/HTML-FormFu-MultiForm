@@ -15,11 +15,12 @@ my $form2_hidden_value;
 
     $multi->load_config_file($yaml_file);
 
-    $multi->process( {
-            foo         => 'abc',
+    $multi->process(
+        {   foo         => 'abc',
             'block.foo' => '123',
             submit      => 'Submit',
-        } );
+        }
+    );
 
     ok( $multi->current_form->submitted_and_valid );
 
@@ -39,12 +40,13 @@ my $form3_hidden_value;
 
     $multi->load_config_file($yaml_file);
 
-    $multi->process( {
-            crypt       => $form2_hidden_value,
+    $multi->process(
+        {   crypt       => $form2_hidden_value,
             bar         => 'def',
             'block.bar' => '456',
             submit      => 'Submit',
-        } );
+        }
+    );
 
     my $form = $multi->current_form;
 
@@ -64,12 +66,13 @@ my $form3_hidden_value;
 
     $multi->load_config_file($yaml_file);
 
-    $multi->process( {
-            crypt       => $form3_hidden_value,
+    $multi->process(
+        {   crypt       => $form3_hidden_value,
             baz         => 'ghi',
             'block.baz' => '789',
             submit      => 'Submit',
-        } );
+        }
+    );
 
     ok( $multi->complete );
 

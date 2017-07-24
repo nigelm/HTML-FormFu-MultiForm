@@ -9,11 +9,12 @@ my $multi = HTML::FormFu::MultiForm->new;
 
 $multi->load_config_file('t/multiform-nested-name/multiform.yml');
 
-$multi->process( {
-        foo         => 'abc',
+$multi->process(
+    {   foo         => 'abc',
         'block.foo' => '123',
         submit      => 'Submit',
-    } );
+    }
+);
 
 my $form = $multi->current_form;
 
@@ -23,4 +24,6 @@ is_deeply(
     $form->params,
     {   foo    => 'abc',
         submit => 'Submit',
-        block  => { foo => '123', } } );
+        block  => { foo => '123', }
+    }
+);

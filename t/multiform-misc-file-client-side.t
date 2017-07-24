@@ -52,8 +52,7 @@ my $q;
 {
     my $file = 't/multiform-misc-file-client-side.txt';
     local *STDIN;
-    open STDIN,
-        "<", $file
+    open STDIN, "<", $file
         or die "missing test file $file";
     binmode STDIN;
     $q = CGI->new;
@@ -87,8 +86,7 @@ my $form2_hidden_value;
     # next_form
     my $form_2 = $multi->next_form;
 
-    my $hidden_field = $form_2->get_field(
-        { name => $multi->default_multiform_hidden_name } );
+    my $hidden_field = $form_2->get_field( { name => $multi->default_multiform_hidden_name } );
 
     $form2_hidden_value = $hidden_field->default;
 }
@@ -100,10 +98,11 @@ my $form2_hidden_value;
 
     $multi->load_config_file($yaml_file);
 
-    $multi->process( {
-            $multi->default_multiform_hidden_name => $form2_hidden_value,
+    $multi->process(
+        {   $multi->default_multiform_hidden_name => $form2_hidden_value,
             bar                                   => 'def',
-        } );
+        }
+    );
 
     ok( $multi->complete );
 

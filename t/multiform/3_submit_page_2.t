@@ -15,17 +15,17 @@ my $form2_hidden_value;
 
     $multi->load_config_file($yaml_file);
 
-    $multi->process( {
-            foo    => 'abc',
+    $multi->process(
+        {   foo    => 'abc',
             submit => 'Submit',
-        } );
+        }
+    );
 
     ok( $multi->current_form->submitted_and_valid );
 
     my $form2 = $multi->next_form;
 
-    my $hidden_field = $form2->get_field(
-        { name => $multi->default_multiform_hidden_name } );
+    my $hidden_field = $form2->get_field( { name => $multi->default_multiform_hidden_name } );
 
     $form2_hidden_value = $hidden_field->default;
 }
@@ -33,16 +33,16 @@ my $form2_hidden_value;
 # submit form 2
 
 {
-    my $multi = HTML::FormFu::MultiForm->new(
-        { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );
+    my $multi = HTML::FormFu::MultiForm->new( { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );
 
     $multi->load_config_file($yaml_file);
 
-    $multi->process( {
-            $multi->default_multiform_hidden_name => $form2_hidden_value,
+    $multi->process(
+        {   $multi->default_multiform_hidden_name => $form2_hidden_value,
             bar                                   => 'def',
             submit                                => 'Submit',
-        } );
+        }
+    );
 
     my $form = $multi->current_form;
 
