@@ -1,4 +1,18 @@
 package HTML::FormFu::MultiForm;
+
+# ABSTRACT: Handle multi-page/stage forms with FormFu
+
+use strict;
+
+# VERSION
+# AUTHORITY
+
+=head1 DESCRIPTION
+
+For now, see test files in L<Catalyst::Controller::HTML::FormFu> for examples.
+
+=cut
+
 use Moose;
 use MooseX::Attribute::Chained;
 
@@ -570,24 +584,3 @@ sub _restore_upload_parent {
 __PACKAGE__->meta->make_immutable;
 
 1;
-
-__END__
-
-=head1 NAME
-
-HTML::FormFu::MultiForm - Handle multi-page/stage forms
-
-=head1 DESCRIPTION
-
-For now, see test files in L<Catalyst::Controller::HTML::FormFu> for examples.
-
-=head1 AUTHOR
-
-Carl Franks, C<cfranks@cpan.org>
-
-=head1 LICENSE
-
-This library is free software, you can redistribute it and/or modify it under
-the same terms as Perl itself.
-
-=cut
