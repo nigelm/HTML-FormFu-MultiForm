@@ -1,3 +1,13 @@
+; -- Tidyall config file
+; --
+; -- ignore patterns - mainly to prevent dzil issues with generated files
+ignore = t/00-*
+ignore = t/author-*
+ignore = t/release-*
+ignore = blib/**/*
+ignore = .build/**/*
+ignore = HTML-FormFu-MultiForm*/**/*
+
 [PerlTidy]
 argv =  --profile=$ROOT/.perltidyrc
 select = */**/*.{pl,pm,t}
