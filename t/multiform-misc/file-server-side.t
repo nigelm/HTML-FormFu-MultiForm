@@ -60,8 +60,7 @@ my $q;
 {
     my $file = 't/multiform-misc/file-server-side.txt';
     local *STDIN;
-    open STDIN,
-        "<", $file
+    open STDIN, "<", $file
         or die "missing test file $file";
     binmode STDIN;
     $q = CGI->new;
@@ -77,8 +76,7 @@ my $tmpdir = File::Spec->catdir( $cwd, 't', 'tmp' );
 if ( -d $tmpdir ) {
     opendir my ($dir), $tmpdir;
 
-    my @files
-        = map { File::Spec->catfile( $tmpdir, $_ ) }
+    my @files = map { File::Spec->catfile( $tmpdir, $_ ) }
         grep { $_ !~ /^\.\.?\z/ } readdir($dir);
 
     unlink @files if @files;
@@ -128,8 +126,7 @@ my $form2_hidden_value;
     # next_form
     my $form_2 = $multi->next_form;
 
-    my $hidden_field = $form_2->get_field(
-        { name => $multi->default_multiform_hidden_name } );
+    my $hidden_field = $form_2->get_field( { name => $multi->default_multiform_hidden_name } );
 
     $form2_hidden_value = $hidden_field->default;
 }
@@ -143,10 +140,11 @@ my $form2_hidden_value;
 
     $multi->load_config_file($yaml_file);
 
-    $multi->process( {
-            $multi->default_multiform_hidden_name => $form2_hidden_value,
+    $multi->process(
+        {   $multi->default_multiform_hidden_name => $form2_hidden_value,
             bar                                   => 'def',
-        } );
+        }
+    );
 
     ok( $multi->complete );
 

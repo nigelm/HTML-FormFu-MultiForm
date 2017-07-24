@@ -17,8 +17,7 @@ use Moose;
 use MooseX::Attribute::Chained;
 
 with
-    'HTML::FormFu::Role::FormAndElementMethods' =>
-    { -excludes => 'model_config' },
+    'HTML::FormFu::Role::FormAndElementMethods' => { -excludes => 'model_config' },
     'HTML::FormFu::Role::FormBlockAndFieldMethods',
     'HTML::FormFu::Role::NestedHashUtils',
     'HTML::FormFu::Role::Populate';
@@ -99,11 +98,12 @@ our @SHARED_WITH_FORMFU = (
 
 *loc = \&localize;
 
-for my $name ( qw(
+for my $name (
+    qw(
     persist_stash
     _file_fields
-    ) )
-{
+    )
+    ) {
     has $name => (
         is      => 'rw',
         default => sub { [] },
@@ -173,15 +173,13 @@ sub process {
     if ( defined $data ) {
         $current_form_num = $data->{current_form};
 
-        my $current_form
-            = $self->_load_current_form( $current_form_num, $data );
+        my $current_form = $self->_load_current_form( $current_form_num, $data );
 
         # are we on the last form?
         # are we complete?
 
         if ( ( $current_form_num == scalar @forms )
-            && $current_form->submitted_and_valid )
-        {
+            && $current_form->submitted_and_valid ) {
             $self->complete(1);
         }
 
@@ -252,7 +250,7 @@ sub _load_current_form {
     my $current_data = Clone::clone( $self->forms->[ $current_form_num - 1 ] );
 
     # merge constructor args
-    for my $key ( @SHARED_WITH_FORMFU ) {
+    for my $key (@SHARED_WITH_FORMFU) {
         my $value = $self->$key;
 
         if ( defined $value ) {
@@ -286,10 +284,11 @@ sub _load_current_form {
 
     # add hidden field
     if ( ( !defined $self->multiform_hidden_name ) && $current_form_num > 1 ) {
-        my $field = $current_form->element( {
-                type => 'Hidden',
+        my $field = $current_form->element(
+            {   type => 'Hidden',
                 name => $self->default_multiform_hidden_name,
-            } );
+            }
+        );
 
         $field->constraint( { type => 'Required', } );
     }
@@ -381,7 +380,7 @@ sub next_form {
     my $next_form = HTML::FormFu->new;
 
     # merge constructor args
-    for my $key ( @SHARED_WITH_FORMFU ) {
+    for my $key (@SHARED_WITH_FORMFU) {
         my $value = $self->$key;
 
         if ( defined $value ) {
@@ -414,10 +413,11 @@ sub next_form {
 
     # add hidden field
     if ( !defined $self->multiform_hidden_name ) {
-        my $field = $next_form->element( {
-                type => 'Hidden',
+        my $field = $next_form->element(
+            {   type => 'Hidden',
                 name => $self->default_multiform_hidden_name,
-            } );
+            }
+        );
 
         $field->constraint( { type => 'Required', } );
     }
@@ -537,8 +537,7 @@ sub _save_hidden_data {
     # store data in hidden field
     $data = $crypt->encrypt_hex($data);
 
-    my $hidden_field
-        = $next_form->get_field( { nested_name => $hidden_name, } );
+    my $hidden_field = $next_form->get_field( { nested_name => $hidden_name, } );
 
     $hidden_field->default($data);
 

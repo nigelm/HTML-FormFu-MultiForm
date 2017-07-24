@@ -10,16 +10,16 @@ use YAML::XS qw/ LoadFile /;
 
 my $yaml_file = 't/multiform-nested-name/multiform.yml';
 
-my $multi = HTML::FormFu::MultiForm->new(
-    { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );
+my $multi = HTML::FormFu::MultiForm->new( { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );
 
 $multi->load_config_file($yaml_file);
 
-$multi->process( {
-        foo         => 'abc',
+$multi->process(
+    {   foo         => 'abc',
         'block.foo' => '123',
         submit      => 'Submit',
-    } );
+    }
+);
 
 ok( $multi->current_form->submitted_and_valid );
 
