@@ -2,6 +2,7 @@
     - Removed Test::Aggregate::Nested (prevented installation on current perl)
     - Updated DistZilla config to match other modules
     - SKIP tests that are suffering from CGI version issues
+    - Add tidy checks to dzil config
 
 1.00 2017-07-24
 
