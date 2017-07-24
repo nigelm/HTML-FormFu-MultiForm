@@ -6,6 +6,7 @@ ignore = t/author-*
 ignore = t/release-*
 ignore = blib/**/*
 ignore = .build/**/*
+ignore = build_dir/**/*
 ignore = HTML-FormFu-MultiForm*/**/*
 
 [PerlTidy]
