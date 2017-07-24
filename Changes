@@ -1,0 +1,11 @@
+1.01      2017-07-24 15:25:24+01:00 Europe/London (TRIAL RELEASE)
+    - Removed Test::Aggregate::Nested (prevented installation on current perl)
+    - Updated DistZilla config to match other modules
+    - SKIP tests that are suffering from CGI version issues
+    - Add tidy checks to dzil config
+    - Enable Travis CI builds
+
+1.00 2017-07-24
+
+    - Initial release
+    - broken out from main HTML-FormFu distribution
