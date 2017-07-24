@@ -11,7 +11,7 @@ HTML::FormFu::MultiForm - Handle multi-page/stage forms with FormFu
 
 # VERSION
 
-version 1.01
+version 1.02
 
 # DESCRIPTION
 
