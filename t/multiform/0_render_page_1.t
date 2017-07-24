@@ -8,7 +8,7 @@ use HTML::FormFu::MultiForm;
 my $multi = HTML::FormFu::MultiForm->new(
     { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );
 
-$multi->load_config_file('t-aggregate/multiform-no-combine/multiform.yml');
+$multi->load_config_file('t/multiform/multiform.yml');
 
 $multi->process;
 

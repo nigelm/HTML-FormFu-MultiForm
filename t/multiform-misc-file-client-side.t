@@ -2,15 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-use Cwd qw( getcwd );
-use Fatal qw( mkdir opendir unlink );
-use File::Spec;
 use HTML::FormFu::MultiForm;
-
-if ( $^O =~ /mswin/i ) {
-    plan skip_all => "'tmp_upload_dir' doesn't yet work under MS Windows";
-    exit;
-}
 
 eval "use CGI";
 if ($@) {
@@ -18,7 +10,7 @@ if ($@) {
     exit;
 }
 
-plan tests => 16;
+plan tests => 13;
 
 # Copied from CGI.pm - http://search.cpan.org/perldoc?CGI
 
@@ -52,7 +44,7 @@ plan tests => 16;
 my $q;
 
 {
-    my $file = 't-aggregate/multiform-misc/file-server-side.txt';
+    my $file = 't/multiform-misc-file-client-side.txt';
     local *STDIN;
     open STDIN,
         "<", $file
@@ -61,46 +53,13 @@ my $q;
     $q = CGI->new;
 }
 
-my $cwd = getcwd();
-
-# create tmp dir
-
-my $tmpdir = File::Spec->catdir( $cwd, 't', 'tmp' );
-
-# make sure $tmpdir is empty
-if ( -d $tmpdir ) {
-    opendir my ($dir), $tmpdir;
-
-    my @files
-        = map { File::Spec->catfile( $tmpdir, $_ ) }
-        grep { $_ !~ /^\.\.?\z/ } readdir($dir);
-
-    unlink @files if @files;
-
-}
-else {
-    mkdir $tmpdir;
-}
-
-ok( -d $tmpdir );
-
-my $config_callback = {
-    plain_value => sub {
-        return if !defined $_;
-        s{__CWD\((.+?)\)__}
-        { scalar File::Spec->catdir( $cwd, split( '/', $1 ) ) }eg;
-    },
-};
-
 # submit form 1
 
-my $yaml_file = 't-aggregate/multiform-misc/file-server-side.yml';
+my $yaml_file = 't/multiform-misc-file-client-side.yml';
 my $form2_hidden_value;
 
 {
     my $multi = HTML::FormFu::MultiForm->new;
-
-    $multi->config_callback($config_callback);
 
     $multi->load_config_file($yaml_file);
 
@@ -133,8 +92,6 @@ my $form2_hidden_value;
 {
     my $multi = HTML::FormFu::MultiForm->new;
 
-    $multi->config_callback($config_callback);
-
     $multi->load_config_file($yaml_file);
 
     $multi->process( {
@@ -148,7 +105,7 @@ my $form2_hidden_value;
 
     is( $form->param('bar'), 'def' );
 
-    # still got uploaded file from form 1
+    # still got uploaded file
     my $file = $form->param('hello_world');
 
     is( $file->filename,                'hello_world.txt' );
@@ -157,16 +114,5 @@ my $form2_hidden_value;
     is( $file->slurp,                   "Hello World!\n" );
 
     ok( $file->parent == $form );
-
-    # peek into internals to remove file
-
-    my $filename = $file->{_param}->filename;
-
-    ok( unlink $filename );
 }
-
-# cleanup tmp dir
-# will only pass if the tmp file was correctly deleted
-
-ok( rmdir $tmpdir );
 

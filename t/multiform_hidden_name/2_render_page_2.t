@@ -1,14 +1,14 @@
 use strict;
 use warnings;
 
-use Test::More tests => 9;
+use Test::More tests => 7;
 
 use HTML::FormFu::MultiForm;
 use Crypt::CBC ();
 use Storable qw/ thaw /;
 use YAML::XS qw/ LoadFile /;
 
-my $yaml_file = 't-aggregate/multiform-nested-name/multiform.yml';
+my $yaml_file = 't/multiform_hidden_name/multiform.yml';
 
 my $multi = HTML::FormFu::MultiForm->new(
     { tt_args => { INCLUDE_PATH => 'share/templates/tt/xhtml' } } );
@@ -16,9 +16,8 @@ my $multi = HTML::FormFu::MultiForm->new(
 $multi->load_config_file($yaml_file);
 
 $multi->process( {
-        foo         => 'abc',
-        'block.foo' => '123',
-        submit      => 'Submit',
+        foo    => 'abc',
+        submit => 'Submit',
     } );
 
 ok( $multi->current_form->submitted_and_valid );
@@ -43,10 +42,8 @@ my $data = thaw($decrypted);
 is( $data->{current_form}, 2 );
 
 ok( grep { $_ eq 'foo' } @{ $data->{valid_names} } );
-ok( grep { $_ eq 'block.foo' } @{ $data->{valid_names} } );
 ok( grep { $_ eq 'submit' } @{ $data->{valid_names} } );
 
-is( $data->{params}{foo},        'abc' );
-is( $data->{params}{block}{foo}, '123' );
-is( $data->{params}{submit},     'Submit' );
+is( $data->{params}{foo},    'abc' );
+is( $data->{params}{submit}, 'Submit' );
 
