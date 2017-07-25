@@ -4,7 +4,7 @@ package HTML::FormFu::MultiForm;
 
 use strict;
 
-our $VERSION = '1.02'; # VERSION
+our $VERSION = '1.03'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 
@@ -591,7 +591,7 @@ HTML::FormFu::MultiForm - Handle multi-page/stage forms with FormFu
 
 =head1 VERSION
 
-version 1.02
+version 1.03
 
 =head1 DESCRIPTION
 
