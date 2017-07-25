@@ -1,4 +1,6 @@
 {{$NEXT}}
+    - Moved the develop pre-requisites into correct section, reducing the
+      number of required modules for normal use considerably.  RT#122594
 
 1.02      2017-07-24 21:03:25+01:00 Europe/London
     - Fixed next version handling of trial releases
